@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 class GoodnigntApplicationTests {
@@ -16,12 +18,20 @@ class GoodnigntApplicationTests {
 	private RestaurantService restaurantService;
 
 	@Test
-	void createRestaurant() throws Exception {
+	void createAndGetRestaurant() throws Exception {
 		RestaurantRequestDto response = new RestaurantRequestDto("레스토랑","한식");
 		Long id = restaurantService.createRestaurant(response);
-		System.out.println(id);
 		RestaurantResponseDto responseDto = restaurantService.getRestaurantInfo(id);
-		System.out.println(responseDto.toString());
+	}
+
+	@Test
+	void getAllRestaurant() throws Exception{
+		List<RestaurantResponseDto> restaurantResponseDtos = restaurantService.getAllRestaurantInfo();
+	}
+
+	@Test
+	void getAllRestaurantByCategory() throws Exception{
+		List<RestaurantResponseDto> restaurantResponseDtos = restaurantService.getAllRestaurantInfo("한식");
 	}
 
 }

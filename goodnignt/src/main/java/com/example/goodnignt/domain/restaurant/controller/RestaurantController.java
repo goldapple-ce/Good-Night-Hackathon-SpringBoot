@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/restaurants")
 public class RestaurantController {
@@ -22,5 +24,13 @@ public class RestaurantController {
     @GetMapping("/{id}")
     public RestaurantResponseDto getRestaurantInfo(@PathVariable("id") Long id) throws Exception{
         return restaurantService.getRestaurantInfo(id);
+    }
+
+    @GetMapping
+    public List<RestaurantResponseDto> getAllRestaurantInfo(@RequestParam(value = "category",required = false) String category) throws Exception{
+        if (category != null){
+            return restaurantService.getAllRestaurantInfo(category);
+        }
+        return restaurantService.getAllRestaurantInfo();
     }
 }
