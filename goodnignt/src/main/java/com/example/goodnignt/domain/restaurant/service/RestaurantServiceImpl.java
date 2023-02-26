@@ -2,16 +2,18 @@ package com.example.goodnignt.domain.restaurant.service;
 
 import com.example.goodnignt.domain.restaurant.domain.entity.Restaurant;
 import com.example.goodnignt.domain.restaurant.domain.repository.RestaurantRepository;
-import com.example.goodnignt.domain.restaurant.dto.RestaurantRequestDto;
-import com.example.goodnignt.domain.restaurant.dto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.RestaurantRequestDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.UpdateRestaurantRequestDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
@@ -24,8 +26,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantResponseDto getRestaurantInfo(Long id) throws Exception {
-        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
-        return restaurant.get().toResponseDto();
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(null);
+        return restaurant.toResponseDto();
     }
 
     @Override
@@ -38,6 +40,20 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<RestaurantResponseDto> getAllRestaurantInfo(String category) throws Exception {
         List<Restaurant> restaurants = restaurantRepository.findAllByCategory(category);
         return restaurants.stream().map(Restaurant::toResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteRestaurant(Long id) throws Exception {
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(null);
+        restaurant.deleteRestaurant();
+        restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    public void updatedRestaurant(UpdateRestaurantRequestDto request) throws Exception {
+        Restaurant restaurant = restaurantRepository.findById(request.getId()).orElseThrow(null);
+        restaurant.updateCategory(request.getCategory());
+        restaurantRepository.save(restaurant);
     }
 
 }

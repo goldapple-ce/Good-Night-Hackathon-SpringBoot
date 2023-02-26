@@ -1,4 +1,4 @@
-package com.example.goodnignt.domain.restaurant.dto;
+package com.example.goodnignt.domain.restaurant.dto.responseDto;
 
 import lombok.*;
 

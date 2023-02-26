@@ -1,9 +1,9 @@
 package com.example.goodnignt.domain.restaurant.controller;
 
-import com.example.goodnignt.domain.restaurant.dto.RestaurantRequestDto;
-import com.example.goodnignt.domain.restaurant.dto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.RestaurantRequestDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.UpdateRestaurantRequestDto;
 import com.example.goodnignt.domain.restaurant.service.RestaurantService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +32,15 @@ public class RestaurantController {
             return restaurantService.getAllRestaurantInfo(category);
         }
         return restaurantService.getAllRestaurantInfo();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRestaurant(@PathVariable("id") Long id) throws Exception{
+        restaurantService.deleteRestaurant(id);
+    }
+
+    @PutMapping
+    public void updateCategory(@RequestBody UpdateRestaurantRequestDto request) throws Exception{
+        restaurantService.updatedRestaurant(request);
     }
 }

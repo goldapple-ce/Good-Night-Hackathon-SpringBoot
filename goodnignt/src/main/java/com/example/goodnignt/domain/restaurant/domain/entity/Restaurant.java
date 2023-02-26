@@ -1,7 +1,7 @@
 package com.example.goodnignt.domain.restaurant.domain.entity;
 
 
-import com.example.goodnignt.domain.restaurant.dto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
 import com.example.goodnignt.global.entity.BaseEntity;
 import lombok.*;
 
@@ -34,6 +34,10 @@ public class Restaurant extends BaseEntity {
 
     public void deleteRestaurant(){
         this.isActivated = false;
+    }
+
+    public void updateCategory(String category){
+        this.category = category;
     }
 
     public RestaurantResponseDto toResponseDto(){

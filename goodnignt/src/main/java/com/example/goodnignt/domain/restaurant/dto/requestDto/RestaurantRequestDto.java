@@ -1,4 +1,4 @@
-package com.example.goodnignt.domain.restaurant.dto;
+package com.example.goodnignt.domain.restaurant.dto.requestDto;
 
 import com.example.goodnignt.domain.restaurant.domain.entity.Restaurant;
 import lombok.AllArgsConstructor;
