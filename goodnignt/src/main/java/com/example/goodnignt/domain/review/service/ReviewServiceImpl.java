@@ -29,4 +29,9 @@ public class ReviewServiceImpl implements ReviewService{
         Long id = reviewRepository.save(review).getId();
         return id;
     }
+
+    @Override
+    public void deleteReview(Long id) throws Exception {
+        reviewRepository.deleteById(id);
+    }
 }
