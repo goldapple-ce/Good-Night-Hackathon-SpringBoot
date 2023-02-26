@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantRequestDto {
+public class CreateRestaurantRequestDto {
     private String name;
     private String category;
 

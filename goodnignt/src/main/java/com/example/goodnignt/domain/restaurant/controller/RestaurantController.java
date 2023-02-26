@@ -1,7 +1,7 @@
 package com.example.goodnignt.domain.restaurant.controller;
 
-import com.example.goodnignt.domain.restaurant.dto.requestDto.RestaurantRequestDto;
-import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.CreateRestaurantRequestDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.GetRestaurantResponseDto;
 import com.example.goodnignt.domain.restaurant.dto.requestDto.UpdateRestaurantRequestDto;
 import com.example.goodnignt.domain.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,17 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @PostMapping
-    public Long createRestaurant(@RequestBody RestaurantRequestDto restaurantRequestDto) throws Exception {
+    public Long createRestaurant(@RequestBody CreateRestaurantRequestDto restaurantRequestDto) throws Exception {
         return restaurantService.createRestaurant(restaurantRequestDto);
     }
 
     @GetMapping("/{id}")
-    public RestaurantResponseDto getRestaurantInfo(@PathVariable("id") Long id) throws Exception{
+    public GetRestaurantResponseDto getRestaurantInfo(@PathVariable("id") Long id) throws Exception{
         return restaurantService.getRestaurantInfo(id);
     }
 
     @GetMapping
-    public List<RestaurantResponseDto> getAllRestaurantInfo(@RequestParam(value = "category",required = false) String category) throws Exception{
+    public List<GetRestaurantResponseDto> getAllRestaurantInfo(@RequestParam(value = "category",required = false) String category) throws Exception{
         if (category != null){
             return restaurantService.getAllRestaurantInfo(category);
         }

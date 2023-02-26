@@ -2,8 +2,8 @@ package com.example.goodnignt.domain.restaurant.service;
 
 import com.example.goodnignt.domain.restaurant.domain.entity.Restaurant;
 import com.example.goodnignt.domain.restaurant.domain.repository.RestaurantRepository;
-import com.example.goodnignt.domain.restaurant.dto.requestDto.RestaurantRequestDto;
-import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.requestDto.CreateRestaurantRequestDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.GetRestaurantResponseDto;
 import com.example.goodnignt.domain.restaurant.dto.requestDto.UpdateRestaurantRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +19,25 @@ public class RestaurantServiceImpl implements RestaurantService {
     private RestaurantRepository restaurantRepository;
 
     @Override
-    public Long createRestaurant(RestaurantRequestDto request) throws Exception {
+    public Long createRestaurant(CreateRestaurantRequestDto request) throws Exception {
         Restaurant restaurant = request.toEntity();
         return restaurantRepository.save(restaurant).getId();
     }
 
     @Override
-    public RestaurantResponseDto getRestaurantInfo(Long id) throws Exception {
+    public GetRestaurantResponseDto getRestaurantInfo(Long id) throws Exception {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(null);
         return restaurant.toResponseDto();
     }
 
     @Override
-    public List<RestaurantResponseDto> getAllRestaurantInfo() throws Exception {
+    public List<GetRestaurantResponseDto> getAllRestaurantInfo() throws Exception {
         List<Restaurant> restaurants = restaurantRepository.findAll();
         return restaurants.stream().map(Restaurant::toResponseDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<RestaurantResponseDto> getAllRestaurantInfo(String category) throws Exception {
+    public List<GetRestaurantResponseDto> getAllRestaurantInfo(String category) throws Exception {
         List<Restaurant> restaurants = restaurantRepository.findAllByCategory(category);
         return restaurants.stream().map(Restaurant::toResponseDto).collect(Collectors.toList());
     }

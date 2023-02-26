@@ -1,7 +1,7 @@
 package com.example.goodnignt.domain.restaurant.domain.entity;
 
 
-import com.example.goodnignt.domain.restaurant.dto.responseDto.RestaurantResponseDto;
+import com.example.goodnignt.domain.restaurant.dto.responseDto.GetRestaurantResponseDto;
 import com.example.goodnignt.global.entity.BaseEntity;
 import lombok.*;
 
@@ -40,7 +40,7 @@ public class Restaurant extends BaseEntity {
         this.category = category;
     }
 
-    public RestaurantResponseDto toResponseDto(){
-        return RestaurantResponseDto.builder().name(name).category(category).createdAt(super.getCreatedAt()).build();
+    public GetRestaurantResponseDto toResponseDto(){
+        return GetRestaurantResponseDto.builder().name(name).category(category).createdAt(super.getCreatedAt()).build();
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ToString
-public class RestaurantResponseDto {
+public class GetRestaurantResponseDto {
     private String name;
     private String category;
     private LocalDate createdAt;
